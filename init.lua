@@ -193,6 +193,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<leader>n', ':Oil<CR>', { noremap = true, silent = true, desc = 'Oil' })
 
+vim.keymap.set('n', '<leader>C', ':CopyRelativePath<CR>', { noremap = true, silent = true, desc = 'CopyRelativePath' })
 -- Command for TODO
 
 vim.keymap.set('n', '<leader>T', ':TodoTelescope<CR>', { noremap = true, silent = true, desc = 'TodoTelescope' })
@@ -306,6 +307,12 @@ require('lazy').setup({
     config = function()
       -- Optional: Enable logging for debugging
       vim.g.vim_be_better_log_file = 1
+    end,
+  },
+  {
+    'ohakutsu/socks-copypath.nvim',
+    config = function()
+      require('socks-copypath').setup()
     end,
   },
   {
@@ -514,11 +521,14 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          file_ignore_patterns = {
+            'node_modules',
+          },
+          mappings = {
+            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
